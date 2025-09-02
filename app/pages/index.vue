@@ -1,6 +1,6 @@
 <template>
   <div id="splash-screen">
-    <NuxtImg id="hero" src="/images/ff-logo.svg" />
+    <NuxtImg id="hero" src="/images/ff-logo.svg" alt="Fully Formed logo" />
     <h1 id="heading-splash-screen">Fully Formed</h1>
     <p id="tagline">
       Flawless forms, <NuxtLink to="/home">just add water.</NuxtLink>
