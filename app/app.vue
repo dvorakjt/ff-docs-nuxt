@@ -1,5 +1,6 @@
 <template>
   <div>
+    <MainNavigation />
     <Transition
       :onBeforeEnter="onBeforeEnter"
       :onEnter="onEnter"
