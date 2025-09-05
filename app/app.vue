@@ -12,63 +12,74 @@
 </template>
 
 <script setup lang="ts">
+// plan:
+// how to scale things not use width and height
+
 import { usePageTransitionStore } from "./stores/pageTransitionStore";
-import { gsap } from "gsap";
 import { BackgroundPainter } from "./util/background-painter";
 import { MainAnimationCoordinator } from "./util/main-animation-coordinator";
 import { loadImages } from "./util/load-images";
-
-// const images = await loadImages([
-//   "/images/background-images/logo-89x75.png",
-//   "/images/background-images/logo-355x300.png",
-//   "/images/background-images/logo-355x300.png",
-//   "/images/background-images/logo-592x500.png",
-// ]);
 
 const route = useRoute();
 const backgroundPainter = ref<BackgroundPainter | null>();
 const mainAnimationCoordinator = ref<MainAnimationCoordinator | null>();
 
-onBeforeMount(() => {
-  const canvas = document.getElementById("background") as HTMLCanvasElement;
-  const images = [document.getElementById("hero") as HTMLImageElement];
-
-  backgroundPainter.value = new BackgroundPainter(
-    canvas,
-    images,
-    90,
-    75,
-    35,
-    33
-  );
-
-  mainAnimationCoordinator.value = new MainAnimationCoordinator({
-    animationDurationInSeconds: 0.4,
-    splashScreenId: "splash-screen",
-    splashScreenHeadingId: "heading-splash-screen",
-    heroId: "hero",
-    navLogoId: "ff-logo",
-    homeScreenHeadingId: "heading-home",
-    backgroundPainter: backgroundPainter.value,
-  });
-});
-
 onMounted(() => {
-  resizeAndPaintBackground();
+  loadImages([
+    "/images/background-images/logo-89x75.png",
+    "/images/background-images/logo-355x300.png",
+    "/images/background-images/logo-355x300.png",
+    "/images/background-images/logo-592x500.png",
+  ]).then((images) => {
+    console.log(images);
 
-  // should store this in a ref so can remove it on unmount
-  window.addEventListener("resize", resizeAndPaintBackground);
-
-  function resizeAndPaintBackground() {
     const canvas = document.getElementById("background") as HTMLCanvasElement;
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    // oops! don't know animation progress here!
-    // backgroundPainter.value?.paintBackground({
-    //   goalState = route.path === '/' ? 'collapsed' : 'expanded',
-    //   animationProgress:
-    // })
-  }
+
+    backgroundPainter.value = new BackgroundPainter(
+      canvas,
+      images,
+      90,
+      75,
+      35,
+      33
+    );
+
+    mainAnimationCoordinator.value = new MainAnimationCoordinator({
+      animationDurationInSeconds: 0.4,
+      splashScreenId: "splash-screen",
+      splashScreenHeadingId: "heading-splash-screen",
+      heroId: "hero",
+      navLogoId: "ff-logo",
+      homeScreenHeadingId: "heading-home",
+      backgroundPainter: backgroundPainter.value,
+    });
+
+    resizeAndPaintBackground();
+
+    // should store this in a ref so can remove it on unmount
+    window.addEventListener("resize", resizeAndPaintBackground);
+
+    function resizeAndPaintBackground() {
+      const canvas = document.getElementById("background") as HTMLCanvasElement;
+      canvas.width = window.innerWidth - 92;
+      canvas.height = window.innerHeight - 48;
+
+      const progress = mainAnimationCoordinator.value!.getProgress();
+      if (route.path === "/" && progress >= 1) {
+        return;
+      } else if (progress >= 1) {
+        backgroundPainter.value!.paintStaticBackground();
+      } else {
+        const hero = document.getElementById("hero")!;
+        const heroSizeAndPosition = hero.getBoundingClientRect();
+        backgroundPainter.value!.paintAnimatedBackground({
+          goalState: pageTransitionStore.to === "/" ? "collapsed" : "expanded",
+          animationProgress: progress,
+          heroSizeAndPosition,
+        });
+      }
+    }
+  });
 });
 
 const pageTransitionStore = usePageTransitionStore();
@@ -131,10 +142,10 @@ h6 {
 
 #background {
   position: fixed;
-  top: 0;
-  left: 0;
-  height: 100vh;
-  width: 100vw;
+  top: 24px;
+  left: 46px;
+  height: calc(100vh - 48px);
+  width: calc(100vw - 92px);
   z-index: -1;
 }
 </style>

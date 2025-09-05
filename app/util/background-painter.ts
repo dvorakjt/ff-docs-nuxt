@@ -30,7 +30,7 @@ export class BackgroundPainter {
     this.context = canvas.getContext("2d")!;
   }
 
-  public paintBackground({
+  public paintAnimatedBackground({
     goalState,
     animationProgress,
     heroSizeAndPosition,
@@ -98,6 +98,34 @@ export class BackgroundPainter {
         );
 
         this.context.drawImage(logo, x, y, width, height);
+      }
+    }
+  }
+
+  public paintStaticBackground() {
+    this.prepareCanvas("expanded", 1);
+    const logo = this.selectOptimallySizedLogo(this.backgroundLogoWidth);
+    const numColumns = this.calculateBackgroundColumns();
+
+    for (let column = 0; column < numColumns; column++) {
+      const numRows = this.calculateBackgroundRows(column);
+
+      for (let row = 0; row < numRows; row++) {
+        // skip the very first row and column
+        if (row === 0 && column === 0) {
+          continue;
+        }
+
+        const x = this.calculateBackgroundLogoX(column);
+        const y = this.calculateBackgroundLogoY(row, column);
+
+        this.context.drawImage(
+          logo,
+          x,
+          y,
+          this.backgroundLogoWidth,
+          this.backgroundLogoHeight
+        );
       }
     }
   }

@@ -171,7 +171,7 @@ export class MainAnimationCoordinator {
         const hero = document.getElementById(this.heroId)!;
         const heroSizeAndPosition = hero.getBoundingClientRect();
 
-        this.backgroundPainter.paintBackground({
+        this.backgroundPainter.paintAnimatedBackground({
           goalState,
           animationProgress,
           heroSizeAndPosition,
@@ -199,6 +199,10 @@ export class MainAnimationCoordinator {
 
   public afterEnter(page: Element) {
     this.setPagePosition(page, "initial");
+  }
+
+  public getProgress() {
+    return this.animationTimeLine?.progress() ?? 1;
   }
 
   private setPagePosition(page: Element, position: "fixed" | "initial") {
