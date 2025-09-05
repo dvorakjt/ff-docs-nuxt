@@ -1,4 +1,4 @@
-type BackgroundState = "collapsed" | "expanded";
+export type BackgroundState = "collapsed" | "expanded";
 
 interface SizeAndPosition {
   x: number;
@@ -7,14 +7,15 @@ interface SizeAndPosition {
   height: number;
 }
 
-interface SizeAndPaintBackgroundParams {
-  newCanvasWidth: number;
-  newCanvasHeight: number;
+interface PaintBackgroundParams {
   goalState: BackgroundState;
   animationProgress: number;
   heroSizeAndPosition: SizeAndPosition;
 }
 
+// paint background can be called on screen resize after resizing the canvas
+// the canvas should always be initially sized once and also painted if
+// the route is not '/'
 export class BackgroundPainter {
   private context: CanvasRenderingContext2D;
 
@@ -29,19 +30,12 @@ export class BackgroundPainter {
     this.context = canvas.getContext("2d")!;
   }
 
-  public sizeAndPaintBackground({
-    newCanvasWidth,
-    newCanvasHeight,
+  public paintBackground({
     goalState,
     animationProgress,
     heroSizeAndPosition,
-  }: SizeAndPaintBackgroundParams): void {
-    this.prepareCanvas(
-      newCanvasWidth,
-      newCanvasHeight,
-      goalState,
-      animationProgress
-    );
+  }: PaintBackgroundParams): void {
+    this.prepareCanvas(goalState, animationProgress);
 
     /*
       Don't draw anything if the background is fully collapsed because an SCG of 
@@ -54,16 +48,8 @@ export class BackgroundPainter {
     this.drawBackground(goalState, animationProgress, heroSizeAndPosition);
   }
 
-  private prepareCanvas(
-    newCanvasWidth: number,
-    newCanvasHeight: number,
-    goalState: BackgroundState,
-    animationProgress: number
-  ) {
+  private prepareCanvas(goalState: BackgroundState, animationProgress: number) {
     this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    this.canvas.width = newCanvasWidth;
-    this.canvas.height = newCanvasHeight;
-
     this.context.imageSmoothingEnabled = true;
     this.context.imageSmoothingQuality = "high";
     const opacity = this.calculateOpacity(goalState, animationProgress);
