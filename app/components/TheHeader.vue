@@ -31,7 +31,27 @@
       </nav>
     </div>
     <div class="navbar-right">
-      <nav class="secondary-navigation"></nav>
+      <nav class="secondary-navigation">
+        <ul>
+          <li>
+            <NuxtImg
+              src="/images/github-logo.svg"
+              alt="Github icon"
+              class="icon"
+            />
+          </li>
+          <li>
+            <NuxtImg src="/images/npm-logo.svg" alt="NPM icon" class="icon" />
+          </li>
+          <li>
+            <NuxtImg
+              src="/images/buy-me-a-coffee-logo.svg"
+              alt="Buy Me a Coffee icon"
+              class="icon"
+            />
+          </li>
+        </ul>
+      </nav>
       <!-- <button
         @click="toggleHamburgerMenu"
         class="hamburger-menu"
@@ -44,7 +64,7 @@
   </header>
 </template>
 
-<script setup>
+<script setup lang="ts">
 const isHamburgerMenuOpen = ref(false);
 
 function toggleHamburgerMenu() {
@@ -55,14 +75,15 @@ function toggleHamburgerMenu() {
 <style scoped>
 header,
 .navbar-left,
-.navbar-right {
+.navbar-right,
+ul {
   display: flex;
   align-items: center;
 }
 
 header {
   justify-content: space-between;
-  padding-left: 46px;
+  padding: 0 46px;
   background-color: #00000099;
 }
 
@@ -137,5 +158,18 @@ a.router-link-active {
 
 .search-bar > input::-webkit-search-cancel-button {
   display: none;
+}
+
+.secondary-navigation > ul {
+  justify-content: flex-end;
+}
+
+.secondary-navigation .icon {
+  width: 37px;
+  height: 37px;
+}
+
+.secondary-navigation li:has(+ li) {
+  margin-right: 30px;
 }
 </style>

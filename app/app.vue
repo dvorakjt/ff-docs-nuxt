@@ -1,6 +1,6 @@
 <template>
   <div>
-    <MainNavigation />
+    <TheHeader class="header" />
     <Transition
       :onBeforeEnter="onBeforeEnter"
       :onEnter="onEnter"
@@ -77,5 +77,12 @@ h4,
 h5,
 h6 {
   font-family: "Monomaniac One";
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
 }
 </style>

@@ -6,7 +6,9 @@ export default defineNuxtConfig({
   googleFonts: {
     families: {
       "Monomaniac One": true,
-      "Roboto Flex": true,
+      "Roboto Flex": {
+        wght: ["400", "500", "700"],
+      },
     },
     download: true,
   },
