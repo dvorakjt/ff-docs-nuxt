@@ -10,13 +10,13 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { usePageTransitionStore } from "./stores/pageTransitionStore";
 import { gsap } from "gsap";
 
 const pageTransitionStore = usePageTransitionStore();
 
-const onBeforeEnter = (el) => {
+const onBeforeEnter = (el: Element) => {
   // if (pageTransitionStore.to === "/home") {
   //   el.style.position = "fixed";
   //   el.style.top = 0;
@@ -44,7 +44,7 @@ const onEnter = () => {
   // tl.play().then(() => done());
 };
 
-const onAfterEnter = (el) => {
+const onAfterEnter = (el: Element) => {
   // if (pageTransitionStore.to === "/home") {
   //   el.style.position = "initial";
   //   el.style.top = "unset";
