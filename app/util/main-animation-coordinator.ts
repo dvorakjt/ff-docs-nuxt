@@ -66,11 +66,7 @@ export class MainAnimationCoordinator {
     }
   }
 
-  public async enter(
-    from: string,
-    to: string,
-    page: HTMLElement
-  ): Promise<void> {
+  public async enter(from: string, to: string, page: Element): Promise<void> {
     this.animationTimeLine = gsap
       .timeline()
       .duration(this.animationDurationInSeconds);
@@ -197,6 +193,8 @@ export class MainAnimationCoordinator {
       // ensure that paintBackground is called at the end of the animation
       this.animationTimeLine.call(paintBackground, [1], 1);
     }
+
+    await this.animationTimeLine!.play();
   }
 
   public afterEnter(page: Element) {

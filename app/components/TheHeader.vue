@@ -105,7 +105,7 @@ a.router-link-active {
 
 #ff-logo {
   width: 90px;
-  height: auto;
+  height: 75px;
   margin-top: 24px;
   margin-bottom: 12px;
 }

@@ -1,6 +1,7 @@
 <template>
   <div>
     <TheHeader class="header" />
+    <canvas id="background"></canvas>
     <Transition
       :onBeforeEnter="onBeforeEnter"
       :onEnter="onEnter"
@@ -13,43 +14,84 @@
 <script setup lang="ts">
 import { usePageTransitionStore } from "./stores/pageTransitionStore";
 import { gsap } from "gsap";
+import { BackgroundPainter } from "./util/background-painter";
+import { MainAnimationCoordinator } from "./util/main-animation-coordinator";
+import { loadImages } from "./util/load-images";
+
+// const images = await loadImages([
+//   "/images/background-images/logo-89x75.png",
+//   "/images/background-images/logo-355x300.png",
+//   "/images/background-images/logo-355x300.png",
+//   "/images/background-images/logo-592x500.png",
+// ]);
+
+const route = useRoute();
+const backgroundPainter = ref<BackgroundPainter | null>();
+const mainAnimationCoordinator = ref<MainAnimationCoordinator | null>();
+
+onBeforeMount(() => {
+  const canvas = document.getElementById("background") as HTMLCanvasElement;
+  const images = [document.getElementById("hero") as HTMLImageElement];
+
+  backgroundPainter.value = new BackgroundPainter(
+    canvas,
+    images,
+    90,
+    75,
+    35,
+    33
+  );
+
+  mainAnimationCoordinator.value = new MainAnimationCoordinator({
+    animationDurationInSeconds: 0.4,
+    splashScreenId: "splash-screen",
+    splashScreenHeadingId: "heading-splash-screen",
+    heroId: "hero",
+    navLogoId: "ff-logo",
+    homeScreenHeadingId: "heading-home",
+    backgroundPainter: backgroundPainter.value,
+  });
+});
+
+onMounted(() => {
+  resizeAndPaintBackground();
+
+  // should store this in a ref so can remove it on unmount
+  window.addEventListener("resize", resizeAndPaintBackground);
+
+  function resizeAndPaintBackground() {
+    const canvas = document.getElementById("background") as HTMLCanvasElement;
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    // oops! don't know animation progress here!
+    // backgroundPainter.value?.paintBackground({
+    //   goalState = route.path === '/' ? 'collapsed' : 'expanded',
+    //   animationProgress:
+    // })
+  }
+});
 
 const pageTransitionStore = usePageTransitionStore();
 
 const onBeforeEnter = (el: Element) => {
-  // if (pageTransitionStore.to === "/home") {
-  //   el.style.position = "fixed";
-  //   el.style.top = 0;
-  //   el.style.left = 0;
-  // }
+  mainAnimationCoordinator.value?.beforeEnter(
+    pageTransitionStore.from!,
+    pageTransitionStore.to!,
+    el
+  );
 };
 
-const onEnter = () => {
-  // gsap.set(el, { opacity: 0 });
-  // const tl = gsap.timeline().add(gsap.to(el, { opacity: 1 }), 0);
-  // const splashScreenHeading = document.getElementById("heading-splash");
-  // const homeScreenHeading = document.getElementById("heading-home");
-  // const splashHeadingRect = splashScreenHeading.getBoundingClientRect();
-  // const homeHeadingRect = homeScreenHeading.getBoundingClientRect();
-  // if (pageTransitionStore.to === "/home") {
-  //   const differenceY = splashHeadingRect.y - homeHeadingRect.y;
-  //   gsap.set("#heading-splash", { opacity: 0 });
-  //   gsap.set("#heading-home", { opacity: 1, y: differenceY });
-  //   tl.add(gsap.to("#heading-home", { y: 0 }), 0);
-  // } else {
-  //   const differenceY = homeHeadingRect.y - splashHeadingRect.y;
-  //   gsap.set("#heading-splash", { opacity: 1, y: differenceY });
-  //   tl.add(gsap.to("#heading-splash", { y: 0 }), 0);
-  // }
-  // tl.play().then(() => done());
+const onEnter = async (el: Element, done: () => void) => {
+  await mainAnimationCoordinator.value?.enter(
+    pageTransitionStore.from!,
+    pageTransitionStore.to!,
+    el
+  );
+  done();
 };
 
 const onAfterEnter = (el: Element) => {
-  // if (pageTransitionStore.to === "/home") {
-  //   el.style.position = "initial";
-  //   el.style.top = "unset";
-  //   el.style.left = "unset";
-  // }
+  mainAnimationCoordinator.value?.afterEnter(el);
 };
 </script>
 
@@ -85,5 +127,14 @@ h6 {
   left: 0;
   width: 100%;
   z-index: 1;
+}
+
+#background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  z-index: -1;
 }
 </style>
