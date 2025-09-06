@@ -1,18 +1,15 @@
 <template>
-  <div id="splash-screen">
-    <NuxtImg id="hero" src="/images/ff-logo.svg" alt="Fully Formed logo" />
-    <h1 id="heading-splash-screen">Fully Formed</h1>
-    <p id="tagline">
+  <div class="screen">
+    <NuxtImg class="hero" src="/images/ff-logo.svg" alt="Fully Formed logo" />
+    <h1 class="heading">Fully Formed</h1>
+    <p class="tagline">
       Flawless forms, <NuxtLink to="/home">just add water.</NuxtLink>
     </p>
   </div>
 </template>
 
 <style scoped>
-#splash-screen {
-  position: fixed;
-  top: 0;
-  left: 0;
+.screen {
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -21,7 +18,7 @@
   align-items: center;
 }
 
-#hero {
+.hero {
   transform-origin: top left;
   width: 230px;
   height: auto;
@@ -33,316 +30,316 @@
 }
 
 /* how best to share these styles...? Probably a class */
-#heading-splash-screen {
+.heading {
   text-transform: uppercase;
   font-size: 45px;
   margin-bottom: 20px;
   text-align: center;
 }
 
-#tagline {
+.tagline {
   font-size: 15px;
 }
 
-#tagline > a {
+.tagline > a {
   color: #7acdc8;
   text-decoration: none;
 }
 
-#tagline > a:hover {
+.tagline > a:hover {
   text-decoration: underline;
 }
 
 @media screen and (min-width: 344px) {
-  #hero {
+  .hero {
     width: 260px;
     height: auto;
   }
 
-  #heading-splash-screen {
+  .heading {
     font-size: 50px;
   }
 }
 
 @media screen and (min-width: 360px) {
-  #hero {
+  .hero {
     width: 280px;
     height: auto;
   }
 
-  #heading-splash-screen {
+  .heading {
     font-size: 55px;
   }
 }
 
 @media screen and (min-width: 390px) {
-  #hero {
+  .hero {
     width: 300px;
     height: auto;
   }
 
-  #heading-splash-screen {
+  .heading {
     font-size: 60px;
   }
 }
 
 @media screen and (min-width: 428px) {
-  #hero {
+  .hero {
     width: 340px;
     height: auto;
   }
 
-  #heading-splash-screen {
+  .heading {
     font-size: 65px;
   }
 
-  #tagline {
+  .tagline {
     font-size: 17px;
   }
 }
 
 @media screen and (min-width: 540px) {
-  #hero {
+  .hero {
     width: 350px;
     height: auto;
   }
 
-  #heading-splash-screen {
+  .heading {
     font-size: 75px;
   }
 
-  #tagline {
+  .tagline {
     font-size: 18px;
   }
 }
 
 @media screen and (min-width: 700px) {
-  #hero {
+  .hero {
     width: 460px;
     height: auto;
   }
 
-  #heading-splash-screen {
+  .heading {
     font-size: 95px;
   }
 }
 
 @media screen and (min-width: 744px) {
-  #hero {
+  .hero {
     width: 500px;
     height: auto;
   }
 
-  #heading-splash-screen {
+  .heading {
     font-size: 100px;
   }
 }
 
 @media screen and (min-width: 768px) {
-  #hero {
+  .hero {
     width: 530px;
     height: auto;
   }
 
-  #heading-splash-screen {
+  .heading {
     font-size: 105px;
   }
 
-  #tagline {
+  .tagline {
     font-size: 20px;
   }
 }
 
 @media screen and (min-width: 834px) {
-  #hero {
+  .hero {
     width: 600px;
     height: auto;
   }
 
-  #heading-splash-screen {
+  .heading {
     font-size: 115px;
   }
 }
 
 @media screen and (min-width: 912px) {
-  #hero {
+  .hero {
     width: 670px;
     height: auto;
   }
 
-  #heading-splash-screen {
+  .heading {
     font-size: 130px;
   }
 }
 
 @media screen and (min-width: 1024px) {
-  #hero {
+  .hero {
     width: 780px;
     height: auto;
   }
 
-  #heading-splash-screen {
+  .heading {
     font-size: 150px;
   }
 }
 
 @media screen and (orientation: landscape) {
-  #hero {
+  .hero {
     width: 200px;
     height: auto;
     margin-bottom: 10px;
   }
 
-  #heading-splash-screen {
+  .heading {
     font-size: 45px;
     margin-bottom: 10px;
   }
 
-  #tagline {
+  .tagline {
     font-size: 18px;
   }
 }
 
 @media screen and (orientation: landscape) and (min-height: 375px) {
-  #hero {
+  .hero {
     width: 250px;
     height: auto;
   }
 
-  #heading-splash-screen {
+  .heading {
     font-size: 50px;
   }
 }
 
 @media screen and (orientation: landscape) and (min-height: 402px) {
-  #hero {
+  .hero {
     width: 255px;
     height: auto;
   }
 
-  #heading-splash-screen {
+  .heading {
     font-size: 55px;
   }
 }
 
 @media screen and (orientation: landscape) and (min-height: 428) {
-  #hero {
+  .hero {
     width: 260px;
     height: auto;
   }
 
-  #heading-splash-screen {
+  .heading {
     font-size: 60px;
   }
 }
 
 @media screen and (orientation: landscape) and (min-height: 430) {
-  #hero {
+  .hero {
     width: 265px;
     height: auto;
   }
 
-  #heading-splash-screen {
+  .heading {
     font-size: 65px;
   }
 }
 
 @media screen and (orientation: landscape) and (min-height: 440) {
-  #hero {
+  .hero {
     width: 270px;
     height: auto;
   }
 }
 
 @media screen and (orientation: landscape) and (min-height: 540) {
-  #hero {
+  .hero {
     width: 300px;
     height: auto;
     margin-bottom: 20px;
   }
 
-  #heading-splash-screen {
+  .heading {
     margin-bottom: 20px;
   }
 }
 
 @media screen and (orientation: landscape) and (max-width: 720) and (min-height: 540) {
-  #heading-splash-screen {
+  .heading {
     font-size: 50px;
   }
 }
 
 @media screen and (orientation: landscape) and (min-height: 700px) {
-  #hero {
+  .hero {
     width: 450px;
     height: auto;
     margin-bottom: 30px;
   }
 
-  #heading-splash-screen {
+  .heading {
     font-size: 100px;
     margin-bottom: 30px;
   }
 
-  #tagline {
+  .tagline {
     font-size: 20px;
   }
 }
 
 @media screen and (orientation: landscape) and (min-height: 768px) {
-  #hero {
+  .hero {
     width: 500px;
     height: auto;
   }
 
-  #heading-splash-screen {
+  .heading {
     font-size: 110px;
   }
 }
 
 @media screen and (orientation: landscape) and (min-height: 834px) {
-  #hero {
+  .hero {
     width: 550px;
     height: auto;
   }
 
-  #heading-splash-screen {
+  .heading {
     font-size: 120px;
   }
 }
 
 @media screen and (orientation: landscape) and (min-height: 912px) {
-  #hero {
+  .hero {
     width: 600px;
     height: auto;
   }
 
-  #heading-splash-screen {
+  .heading {
     font-size: 130px;
   }
 }
 
 @media screen and (orientation: landscape) and (min-height: 1080px) {
-  #hero {
+  .hero {
     width: 650px;
   }
 
-  #heading-splash-screen {
+  .heading {
     font-size: 145px;
   }
 
-  #tagline {
+  .tagline {
     font-size: 25px;
   }
 }
 
 @media screen and (orientation: landscape) and (min-height: 1080px) and (min-width: 1920px) {
-  #hero {
+  .hero {
     width: 700px;
     height: auto;
   }
 
-  #heading-splash-screen {
+  .heading {
     font-size: 150px;
   }
 }

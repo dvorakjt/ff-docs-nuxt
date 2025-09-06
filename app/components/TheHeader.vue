@@ -1,11 +1,11 @@
 <template>
   <header>
     <div class="navbar-left">
-      <NuxtLink to="/" id="to-splash-screen">
+      <NuxtLink to="/">
         <NuxtImg
           src="/images/ff-logo.svg"
           alt="Fully Formed logo"
-          id="ff-logo"
+          class="logo"
         />
       </NuxtLink>
       <nav class="primary-navigation">
@@ -103,7 +103,7 @@ a.router-link-active {
   text-decoration: underline;
 }
 
-#ff-logo {
+.logo {
   width: 90px;
   height: 75px;
   margin-top: 24px;
