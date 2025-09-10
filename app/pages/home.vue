@@ -1,7 +1,7 @@
 <template>
   <div>
     <section class="hero">
-      <h1 class="heading">Fully Formed</h1>
+      <h1 id="heading-home-page" class="heading">Fully Formed</h1>
       <p class="tagline">
         Fully Formed provides powerful, type-safe, style-agnostic form state
         management for React with TypeScript.

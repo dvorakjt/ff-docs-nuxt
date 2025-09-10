@@ -6,7 +6,7 @@
       src="/images/ff-logo.svg"
       alt="Fully Formed logo"
     />
-    <h1 class="heading">Fully Formed</h1>
+    <h1 id="heading-splash-screen" class="heading">Fully Formed</h1>
     <p class="tagline">
       Flawless forms, <NuxtLink to="/home">just add water.</NuxtLink>
     </p>
