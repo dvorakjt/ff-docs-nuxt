@@ -1,6 +1,11 @@
 <template>
   <div class="screen">
-    <NuxtImg class="hero" src="/images/ff-logo.svg" alt="Fully Formed logo" />
+    <img
+      id="hero"
+      class="hero"
+      src="/images/ff-logo.svg"
+      alt="Fully Formed logo"
+    />
     <h1 class="heading">Fully Formed</h1>
     <p class="tagline">
       Flawless forms, <NuxtLink to="/home">just add water.</NuxtLink>

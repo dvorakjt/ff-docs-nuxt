@@ -38,7 +38,7 @@ export class BackgroundPainter {
     this.prepareCanvas(goalState, animationProgress);
 
     /*
-      Don't draw anything if the background is fully collapsed because an SCG of 
+      Don't draw anything if the background is fully collapsed because an SVG of 
       the Fully Formed icon will be rendered in the center of the screen instead.
     */
     if (goalState === "collapsed" && animationProgress >= 1) {

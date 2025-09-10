@@ -1,4 +1,4 @@
-import { usePageTransitionStore } from "~/stores/pageTransitionStore";
+import { usePageTransitionStore } from "~/stores/page-transition-store";
 
 export default defineNuxtRouteMiddleware((to, from) => {
   const { $pinia } = useNuxtApp();

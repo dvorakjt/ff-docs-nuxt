@@ -2,13 +2,14 @@
   <header>
     <div class="navbar-left">
       <NuxtLink to="/">
-        <NuxtImg
+        <img
           src="/images/ff-logo.svg"
           alt="Fully Formed logo"
           class="logo"
+          id="header-logo"
         />
       </NuxtLink>
-      <nav class="primary-navigation">
+      <nav class="primary-navigation animated">
         <ul>
           <li>
             <NuxtLink to="/home">Home</NuxtLink>
@@ -30,7 +31,7 @@
         </ul>
       </nav>
     </div>
-    <div class="navbar-right">
+    <div class="navbar-right animated">
       <nav class="secondary-navigation">
         <ul>
           <li>
@@ -63,14 +64,6 @@
     </div>
   </header>
 </template>
-
-<script setup lang="ts">
-const isHamburgerMenuOpen = ref(false);
-
-function toggleHamburgerMenu() {
-  isHamburgerMenuOpen.value = !isHamburgerMenuOpen.value;
-}
-</script>
 
 <style scoped>
 header,
@@ -108,6 +101,7 @@ a.router-link-active {
   height: 75px;
   margin-top: 24px;
   margin-bottom: 12px;
+  transform-origin: top left;
 }
 
 .primary-navigation {
