@@ -66,12 +66,16 @@ h6 {
   z-index: 1;
 }
 
-.header-enter-active .animated {
+.header-enter-active {
   animation: 0.4s linear 1 forwards slide-down;
 }
 
-.header-leave-active .animated {
+.header-leave-active {
   animation: 0.4s linear reverse 1 forwards slide-down;
+}
+
+.header-leave-active img {
+  visibility: hidden;
 }
 
 @keyframes slide-down {
